@@ -22,7 +22,21 @@ public class SecurityConfig {
                         .ignoringRequestMatchers(new AntPathRequestMatcher("/h2-console/**")))
                 .headers((headers) -> headers
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
-                                XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)));
+                                XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
+                /*
+
+                .formLogin((formLogin) -> formLogin
+                        .loginPage("/usr/member/login")
+                        .successHandler(new CustomSimpleUrlAuthenticationSuccessHandler())
+                        .failureHandler(new CustomSimpleUrlAuthenticationFailureHandler())
+                )
+                .logout((logout) -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/usr/member/logout"))
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true))
+
+                 */
+        ;
         return http.build();
     }
 
