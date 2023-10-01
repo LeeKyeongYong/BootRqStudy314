@@ -10,6 +10,36 @@
                     회원가입
                 </h1>
                 <script>
+                    function checkUsernameDup(el){
+                        const form = $(el).closest('form')[0];
+
+                        form.username.value = form.username.value.trim();
+
+                        if(form.username.value.length == 0){
+                            form.username.focus();
+                            toastWarning('아이디를 입력해주세요.');
+                            return;
+                        }
+
+                        if(form.username.value.length<4){
+                            form.username.focus();
+                            toastWarning('아이디를 4자 이상 입력해주세요.');
+                            return;
+                        }
+
+                        fetch('checkUsernameDup?username='+form.username.value)
+                            .then(res => res.json())
+                            .then((rsData)=>{
+                                if(rsData.msg) toastMsg(rsData.success,rsData.msg);
+                                if(rsData.success){
+                                    validUsername = form.username.value;
+                                    $(form.username).addClass('input-accent');
+                                }
+                            });
+
+                    }
+
+                    let validUsername = '';
                     let submitJoinFormDone = false;
 
                     function submitJoinForm(form){
@@ -63,6 +93,12 @@
                             return;
                         }
 
+                        if(validUsername != form.username.value){
+                            $(form.username).next().focus();
+                            toastWarning('아이디 중복체크를 해주세요.');
+                            return;
+                        }
+
                         form.submit();
                         submitJoinFormDone = true;
                     }
@@ -72,7 +108,11 @@
                         <label class="label">
                             <span class="label-text">아이디</span>
                         </label>
-                        <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus maxlength="30">
+                        <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus maxlength="30"
+                        onchange="$(this).removeClass('input-accent');">
+                        <button onclick="checkUsernameDup(this);" type="button" class="btn btn-block mt-2">
+                            <span>아이디 중복 체크</span>
+                        </button>
                     </div>
 
                     <div class="form-controler">

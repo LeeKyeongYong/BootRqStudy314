@@ -31,4 +31,9 @@ public class MemberService {
         member = memberRepository.save(member);
         return RsData.of("S-1","회원가입이 완료 되었습니다.",member);
     }
+    public RsData checkUsernameDup(String username){
+        if(findByUsername(username).isPresent()) return RsData.of("F-1","%s(은)는 사용중인 아이디 입니다".formatted(username));
+
+        return RsData.of("S-1","%s(은)는 사용 가능한 아이디 입니다.".formatted(username));
+    }
 }

@@ -42,4 +42,9 @@ function toastWarning(msg){
     if(needToShow){
         toast["warning"](pureMsg,"경고");
     }
+
+    function toastMsg(isNotice,Msg){
+        if(isNotice) toastNotice(msg);
+        else toastWarning(msg);
+    }
 }
