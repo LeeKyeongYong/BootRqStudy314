@@ -1,5 +1,6 @@
 <html layout:decorate="~{usr/common/layout}">
     <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
         <title>회원가입</title>
     </head>
     <body>
@@ -10,22 +11,14 @@
                     회원가입
                 </h1>
                 <script>
-                    function checkUsernameDup(el){
-                        const form = $(el).closest('form')[0];
+                    function checkUsernameDup(form){
 
                         form.username.value = form.username.value.trim();
 
-                        if(form.username.value.length == 0){
-                            form.username.focus();
-                            toastWarning('아이디를 입력해주세요.');
-                            return;
-                        }
+                        if(form.username.value.length == 0) return;
 
-                        if(form.username.value.length<4){
-                            form.username.focus();
-                            toastWarning('아이디를 4자 이상 입력해주세요.');
-                            return;
-                        }
+                        if(form.username.value.length < 4) return;
+
 
                         fetch('checkUsernameDup?username='+form.username.value)
                             .then(res => res.json())
@@ -38,6 +31,8 @@
                             });
 
                     }
+
+                    const checkUsernameDupDebounce = _.debounce(()=>checkUsernameDup(document['join-form']),1000);
 
                     let validUsername = '';
                     let submitJoinFormDone = false;
@@ -103,13 +98,13 @@
                         submitJoinFormDone = true;
                     }
                 </script>
-                <form th:action method="POST" onsubmit="submitJoinForm(this); return false;" class="flext flext-col gap-6">
+                <form th:action name="join-form" method="POST" onsubmit="submitJoinForm(this); return false;" class="flext flext-col gap-6">
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">아이디</span>
                         </label>
                         <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus maxlength="30"
-                        onchange="$(this).removeClass('input-accent'); checkUsernameDup(this);">
+                        onchange="$(this).keyup();" onpaste="setTimeoutZero(()=>$(this).keyup());" onkeyup="$(this).removeClass('input-accent'); checkUsernameDupDebounce();">
                         <!--<button onclick="checkUsernameDup(this);" type="button" class="btn btn-block mt-2">
                             <span>아이디 중복 체크</span>
                         </button>-->
