@@ -109,10 +109,10 @@
                             <span class="label-text">아이디</span>
                         </label>
                         <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus maxlength="30"
-                        onchange="$(this).removeClass('input-accent');">
-                        <button onclick="checkUsernameDup(this);" type="button" class="btn btn-block mt-2">
+                        onchange="$(this).removeClass('input-accent'); checkUsernameDup(this);">
+                        <!--<button onclick="checkUsernameDup(this);" type="button" class="btn btn-block mt-2">
                             <span>아이디 중복 체크</span>
-                        </button>
+                        </button>-->
                     </div>
 
                     <div class="form-controler">

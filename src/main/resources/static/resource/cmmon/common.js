@@ -47,4 +47,9 @@ function toastWarning(msg){
         if(isNotice) toastNotice(msg);
         else toastWarning(msg);
     }
+
+    //어떠한 기능을 살짝 늦게 0.1초 미만
+    function setTimeoutZero(callback){
+        setTimeout(callback);
+    }
 }
