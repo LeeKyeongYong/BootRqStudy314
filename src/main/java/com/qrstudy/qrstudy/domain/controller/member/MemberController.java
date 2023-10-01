@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import lombok.RequiredArgsConstructor;
 @Controller
 @RequestMapping("/usr/member/")
+@RequiredArgsConstructor
 public class MemberController {
 
     private final MemberService memberService;

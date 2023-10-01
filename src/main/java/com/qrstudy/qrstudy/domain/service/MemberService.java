@@ -7,6 +7,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.qrstudy.qrstudy.domain.entity.Member;
+
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -31,6 +34,15 @@ public class MemberService {
         member = memberRepository.save(member);
         return RsData.of("S-1","회원가입이 완료 되었습니다.",member);
     }
+
+    public Optional<Member> findByUsername(String username){
+        return memberRepository.findByUsername(username);
+    }
+
+    public Optional<Member> findById(long id){
+        return memberRepository.findById(id);
+    }
+
     public RsData checkUsernameDup(String username){
         if(findByUsername(username).isPresent()) return RsData.of("F-1","%s(은)는 사용중인 아이디 입니다".formatted(username));
 
