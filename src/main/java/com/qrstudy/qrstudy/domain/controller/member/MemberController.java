@@ -3,6 +3,7 @@ package com.qrstudy.qrstudy.domain.controller.member;
 import com.qrstudy.qrstudy.base.rsData.RsData;
 import com.qrstudy.qrstudy.domain.entity.Member;
 import com.qrstudy.qrstudy.domain.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -36,11 +37,12 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@Valid JoinForm joinForm){
+    public String join(@Valid JoinForm joinForm, HttpServletRequest req){
 
         RsData<Member> joinRs =  memberService.join(joinForm.getUsername(),joinForm.getPassword(),joinForm.getUsername(),joinForm.getNickname());
 
             if(joinRs.isFail()){
+                req.setAttribute("msg",joinRs.getMsg());
                 return "common/js";
             }
         return "redirect:/?msg="+Ut.url.encode(joinRs.getMsg());

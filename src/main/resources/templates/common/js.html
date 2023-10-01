@@ -1,4 +1,5 @@
-<script>
-    alert('이미 사용중인 아이디입니다.');
+<script th:inline="javascript">
+    const msg=/*[[${msg}]]*/null;
+    if(msg) alert(msg);
     history.back();
 </script>
