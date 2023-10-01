@@ -22,6 +22,12 @@
                             return;
                         }
 
+                        if(form.username.value.length < 4){
+                            form.username.focus();
+                            toastWarning("아이디를 4자 이상 입력해주세요.");
+                            return;
+                        }
+
                         form.password.value = form.password.value.trim();
 
                         if(form.password.value.length == 0){
@@ -30,11 +36,30 @@
                             return;
                         }
 
+                        if(form.password.value.length<4){
+                            form.password.focus();
+                            toastWarning("비밀번호를 4자 이상 입력해주세요.");
+                            return;
+                        }
+
                         form.passwordConfirm.value = form.passwordConfirm.trim();
 
                         if(form.password.value!= form.passwordConfirm.value){
                             form.passwordConfirm.focus();
                             toastWarning('비밀번호 확인이 일치하지 않습니다.');
+                            return;
+                        }
+
+                        form.nickname.value = form.nickname.value.trim();
+                        if(form.nickname.value.length == 0){
+                            form.nickname.focus();
+                            toastWarning('닉네임을 입력해주세요.');
+                            return;
+                        }
+
+                        if(form.nickname.value.length < 4){
+                            form.nickname.focus();
+                            toastWarning('별명을 4자 이상 입력해주세요.');
                             return;
                         }
 
@@ -63,7 +88,12 @@
                         </label>
                         <input type="password" name="passwordConfirm" placeholder="비밀번호 확인" class="input input-bordered" maxlength="30">
                     </div>
-
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">별명</span>
+                        </label>
+                        <input type="text" name="nickname" placeholder="닉네임" class="input input-bordered" maxlength="30">
+                    </div>
                     <div>
                         <button class="btn btn-block btn-primary gap-1">
                             <i class="fa-solid fa-user-plus"></i>
