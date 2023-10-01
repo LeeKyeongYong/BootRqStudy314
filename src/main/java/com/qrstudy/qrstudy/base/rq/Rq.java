@@ -142,7 +142,13 @@ public class Rq {
     }
 
     public String historyBack(String msg){
-        req.setAttribute("msg",msg);
+        String referer = req.getHeader("referer");
+        String key = "historyBackFailMsg___"+referer;
+        req.setAttribute("localStorageKeyAboutHistoryBackFailMsg",key);
+        req.setAttribute("historyBackFailMsg",msg);
+        
+        //200이 아니라 400으로 응답코드로 지정되도록
+        resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
         return "common/js";
     }
 

@@ -1,5 +1,14 @@
 <script th:inline="javascript">
     const msg=/*[[${msg}]]*/null;
     if(msg) alert(msg);
+
+    //에러메세지
+    const localStorageKeyAboutHisoryBackFileMsg=/*[[${localStorageKeyAboutHistoryBackFileMsg}]]*/null;
+    const historyBackFailMsg =/*[[${historyBackFileMsg}]]*/ null;
+
+    if(localStorageKeyAboutHisoryBackFileMsg&& localStorageKeyAboutHisoryBackFileMsg.trim().length>0){
+        localStorage.setItem(localStorageKeyAboutHisoryBackFileMsg,historyBackFailMsg);
+    }
+
     history.back();
 </script>
