@@ -44,7 +44,7 @@ public class MemberController {
     @PostMapping("/join")
     public String join(@Valid JoinForm joinForm){
 
-        RsData<Member> joinRs =  memberService.join(joinForm.getUsername(),joinForm.getPassword(),joinForm.getUsername(),joinForm.getNickname());
+        RsData<Member> joinRs =  memberService.join(joinForm.getUsername(),joinForm.getPassword(),joinForm.getNickname());
 
             if(joinRs.isFail()){
                 return rq.historyBack(joinRs.getMsg());
