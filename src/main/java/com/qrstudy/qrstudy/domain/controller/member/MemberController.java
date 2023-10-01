@@ -1,8 +1,10 @@
 package com.qrstudy.qrstudy.domain.controller.member;
 
+import com.qrstudy.qrstudy.base.rq.Rq;
 import com.qrstudy.qrstudy.base.rsData.RsData;
 import com.qrstudy.qrstudy.domain.entity.Member;
 import com.qrstudy.qrstudy.domain.service.MemberService;
+import com.qrstudy.qrstudy.domain.standard.util.Ut;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -12,13 +14,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.qrstudy.qrstudy.domain.standard.util.Ut;
 
 @Controller
 @RequestMapping("/usr/member/")
 public class MemberController {
 
     private final MemberService memberService;
+
+    private final Rq rq;
 
     @GetMapping("/join")
     public String showJoin(){
@@ -37,14 +40,13 @@ public class MemberController {
     }
 
     @PostMapping("/join")
-    public String join(@Valid JoinForm joinForm, HttpServletRequest req){
+    public String join(@Valid JoinForm joinForm){
 
         RsData<Member> joinRs =  memberService.join(joinForm.getUsername(),joinForm.getPassword(),joinForm.getUsername(),joinForm.getNickname());
 
             if(joinRs.isFail()){
-                req.setAttribute("msg",joinRs.getMsg());
-                return "common/js";
+                return rq.historyBack(joinRs.getMsg());
             }
-        return "redirect:/?msg="+Ut.url.encode(joinRs.getMsg());
+        return rq.redirect("/",joinRs.getMsg());
     }
 }
