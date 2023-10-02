@@ -97,5 +97,13 @@ public class Ut {
             String urlAfter = url.substring(startPoint+endPoint+1);
             return url.substring(0,startPoint)+urlAfter;
         }
+
+        public static String encodeWithTtl(String s){
+            return withTtl(encode(s));
+        }
+
+        public static String withTtl(String msg){
+            return msg+";ttl="+new Date().getTime();
+        }
     }
 }

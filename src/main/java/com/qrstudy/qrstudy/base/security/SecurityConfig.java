@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .headers((headers) -> headers
                         .addHeaderWriter(new XFrameOptionsHeaderWriter(
                                 XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)))
-                /*
+
 
                 .formLogin((formLogin) -> formLogin
                         .loginPage("/usr/member/login")
@@ -33,10 +33,7 @@ public class SecurityConfig {
                 .logout((logout) -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/usr/member/logout"))
                         .logoutSuccessUrl("/")
-                        .invalidateHttpSession(true))
-
-                 */
-        ;
+                        .invalidateHttpSession(true));
         return http.build();
     }
 
