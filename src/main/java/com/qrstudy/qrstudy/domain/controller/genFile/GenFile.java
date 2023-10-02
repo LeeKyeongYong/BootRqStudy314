@@ -5,8 +5,12 @@ import com.qrstudy.qrstudy.base.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import lombok.experimental.SuperBuilder;
+
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
@@ -15,7 +19,9 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @SuperBuilder
 @ToString(callSuper = true)
-@Table(indexes = {@Index(name = "idx1",columnList = "relId,relTypeCode,typeCode,type2Code")})
+@Table(indexes = {
+        @Index(name = "idx1", columnList = "relId,relTypeCode,typeCode,type2Code")
+})
 public class GenFile extends BaseEntity {
     private String relTypeCode;
     private long relId;
@@ -44,5 +50,4 @@ public class GenFile extends BaseEntity {
     public String getFilePath() {
         return AppConfig.getGenFileDirPath() + "/" + getFileDir() + "/" + getFileName();
     }
-
 }

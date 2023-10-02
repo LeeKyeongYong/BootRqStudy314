@@ -1,7 +1,7 @@
 package com.qrstudy.qrstudy.base.app;
 
 import lombok.Getter;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
