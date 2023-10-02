@@ -38,9 +38,10 @@
                             </svg>
                         </label>
                         <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 show bg-base-100 rounded-box w-52">
-                            <li><a href="#"><i class="fa-solid fa-arrow-right-to-bracket"></i>로그인</a></li>
-                            <li><a href="/usr/member/join"><i class="fa-solid fa-user-plus"></i>회원가입</a></li>
-                            <li><a href="#"><i class="fa-solid fa-user"></i>내 정보</a></li>
+                            <li th:if="${@rq.logout}"><a href="/usr/member/login"><i class="fa-solid fa-arrow-right-to-bracket"></i>로그인</a></li>
+                            <li th:if="${@rq.logout}"><a href="/usr/member/join"><i class="fa-solid fa-user-plus"></i>회원가입</a></li>
+                            <li th:if="${@rq.login}"><a href="/usr/member/me"><i class="fa-solid fa-user"></i>내 정보</a></li>
+                            <li th:if="${@rq.login}"><a href="/usr/member/logout"><i class="fa-solid fa-arraw-right-from-bracket"></i>로그아웃</a></li>
                         </ul>
                     </div>
                 </div>
@@ -48,7 +49,10 @@
                     <a class="btn btn-ghost normal-case text-xl">테스트</a>
                 </div>
                 <div class="navbar-end">
-                    <button class="btn btn-ghost btn-circle">
+                    <a href="/usr/member/me" class="btn btn-ghost btn-circle">
+                        <img th:if="${@rq.login}" class="w-[30px] h-[30px] rounded-full object-cover" th:src="${@rq.profileImgUrl}" alt="">
+                    </a>
+                    <button class="btn btn-ghost btn-circle" th:if="${@rq.login}">
                         <div class="indicator">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                  stroke="currentColor">

@@ -29,7 +29,7 @@ public class CustomSimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthen
 
         String targetUrl = savedRequest!=null?savedRequest.getRedirectUrl():getDefaultTargetUrl();
 
-        targetUrl = Ut.url.modifyQueryParam(targetUrl,"msg",Ut.url.encodeWithTtl("환영합니다."));
+        targetUrl = Ut.url.modifyQueryParam(targetUrl,"msg",Ut.url.endcodeWithTtl("환영합니다."));
 
         getRedirectStrategy().sendRedirect(request,response,targetUrl);
     }

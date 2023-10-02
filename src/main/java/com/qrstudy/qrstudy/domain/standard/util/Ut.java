@@ -98,12 +98,14 @@ public class Ut {
             return url.substring(0,startPoint)+urlAfter;
         }
 
-        public static String encodeWithTtl(String s){
+        public static String endcodeWithTtl(String s){
             return withTtl(encode(s));
         }
 
         public static String withTtl(String msg){
             return msg+";ttl="+new Date().getTime();
         }
+
+
     }
 }

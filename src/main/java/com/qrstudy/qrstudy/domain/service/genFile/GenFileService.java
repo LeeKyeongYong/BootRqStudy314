@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -58,4 +59,9 @@ public class GenFileService {
     private String getCurrentDirName(String relTypeCode){
         return relTypeCode+"/"+ Ut.date.getCurrentDateFormatted("yyyy_MM_dd");
     }
+
+    public Optional<GenFile> findGenFileBy(String relTypeCode,Long relId,String typeCode,String type2Code,int fileNo){
+        return genFileRepository.findByRelTypeCodeAndRelIdAndTypeCodeAndType2CodeAndFileNo(relTypeCode,relId,typeCode,type2Code,fileNo);
+    }
+
 }

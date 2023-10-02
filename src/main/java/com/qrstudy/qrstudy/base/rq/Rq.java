@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.RequestScope;
 
+import java.util.Optional;
+
 @Component
 @RequestScope
 public class Rq {
@@ -153,6 +155,12 @@ public class Rq {
     }
 
     public String redirect(String url,String msg){
-        return "redirect:"+Ut.url.modifyQueryParam(url,"msg",Ut.url.encodeWithTtl(msg));
+        return "redirect:"+Ut.url.modifyQueryParam(url,"msg",Ut.url.endcodeWithTtl(msg));
+    }
+
+    public String getProfileImgUrl(){
+        return Optional.ofNullable(getMeember())
+                .flatMap(memberService::findProfileImgUrl)
+                .orElse("http://placehold.co/30x30?text=UU");
     }
 }
