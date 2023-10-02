@@ -1,4 +1,4 @@
-package com.qrstudy.qrstudy.domain.repository;
+package com.qrstudy.qrstudy.domain.repository.member;
 
 import com.qrstudy.qrstudy.domain.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

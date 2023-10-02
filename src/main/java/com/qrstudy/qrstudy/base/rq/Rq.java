@@ -1,7 +1,7 @@
 package com.qrstudy.qrstudy.base.rq;
 
 import com.qrstudy.qrstudy.domain.entity.Member;
-import com.qrstudy.qrstudy.domain.service.MemberService;
+import com.qrstudy.qrstudy.domain.service.member.MemberService;
 import com.qrstudy.qrstudy.domain.standard.util.Ut;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
