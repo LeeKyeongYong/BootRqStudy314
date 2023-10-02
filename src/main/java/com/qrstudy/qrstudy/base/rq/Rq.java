@@ -153,6 +153,6 @@ public class Rq {
     }
 
     public String redirect(String url,String msg){
-        return "redirect:"+url+"?msg="+ Ut.url.encode(msg);
+        return "redirect:"+Ut.url.modifyQueryParam(url,"msg",Ut.url.encode(msg));
     }
 }
