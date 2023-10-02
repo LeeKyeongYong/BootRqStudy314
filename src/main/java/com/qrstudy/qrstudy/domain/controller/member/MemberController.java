@@ -4,18 +4,18 @@ import com.qrstudy.qrstudy.base.rq.Rq;
 import com.qrstudy.qrstudy.base.rsData.RsData;
 import com.qrstudy.qrstudy.domain.entity.Member;
 import com.qrstudy.qrstudy.domain.service.MemberService;
-import com.qrstudy.qrstudy.domain.standard.util.Ut;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartRequest;
+
 @Controller
 @RequestMapping("/usr/member/")
 @RequiredArgsConstructor
@@ -39,6 +39,7 @@ public class MemberController {
         private String nickname;
         @NotBlank
         private String password;
+        private MultipartRequest profileImg;
     }
 
     @PostMapping("/join")

@@ -1,25 +1,27 @@
 package com.qrstudy.qrstudy.domain.entity;
 
-import jakarta.persistence.*;
+import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@EqualsAndHashCode
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-@Getter
-public class Member {
+import static lombok.AccessLevel.PROTECTED;
 
-    @EqualsAndHashCode.Include
-    @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long id;
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor(access = PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
+@SuperBuilder
+@ToString(callSuper = true)
+public class Member extends BaseEntity {
+
     @Column(unique = true)
     private String username;
     @Setter
