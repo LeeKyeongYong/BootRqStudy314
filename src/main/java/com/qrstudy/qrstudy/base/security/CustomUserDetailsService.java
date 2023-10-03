@@ -1,6 +1,6 @@
 package com.qrstudy.qrstudy.base.security;
 
-import com.qrstudy.qrstudy.domain.entity.Member;
+import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User;

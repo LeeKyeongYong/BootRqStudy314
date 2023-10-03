@@ -2,25 +2,31 @@ package com.qrstudy.qrstudy.domain.service.member;
 
 import com.qrstudy.qrstudy.base.rsData.RsData;
 import com.qrstudy.qrstudy.domain.controller.genFile.GenFile;
+import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.repository.member.MemberRepository;
+import com.qrstudy.qrstudy.domain.service.email.EmailService;
 import com.qrstudy.qrstudy.domain.service.genFile.GenFileService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.qrstudy.qrstudy.domain.entity.Member;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
+@Slf4j
 public class MemberService {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final GenFileService genFileService;
+    private final EmailService emailService;
+
 
     @Transactional
     public RsData<Member> join(String username, String password, String nickname,String email,MultipartFile profileImg){
@@ -42,7 +48,24 @@ public class MemberService {
             genFileService.save(member.getModelName(),member.getId(),"common","profileImg",0,profileImg);
         }
 
+        sendJoinCompleteMail(member);
+
         return RsData.of("S-1","회원가입이 완료 되었습니다.",member);
+    }
+
+    private void sendJoinCompleteMail(Member member){
+        CompletableFuture<RsData> sendRsFuture = emailService.send(member.getEmail(),"회원가입이 완료되었습니다","회원가입이 완료되었습니다.");
+
+        final String email = member.getEmail();
+
+        sendRsFuture.whenComplete((rs,throwable)->{
+            if(rs.isFail()){
+                log.info("메일 발송 실패: "+email);
+                return;
+            }
+
+            log.info("메일 발송 성공: "+email);
+        });
     }
 
     private Optional<Member> findByEmail(String email){

@@ -1,4 +1,4 @@
-package com.qrstudy.qrstudy.domain.entity;
+package com.qrstudy.qrstudy.domain.entity.member;
 
 import com.qrstudy.qrstudy.base.jpa.BaseEntity;
 import jakarta.persistence.Column;

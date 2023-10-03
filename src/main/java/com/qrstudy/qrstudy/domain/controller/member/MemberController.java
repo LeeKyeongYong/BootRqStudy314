@@ -2,7 +2,7 @@ package com.qrstudy.qrstudy.domain.controller.member;
 
 import com.qrstudy.qrstudy.base.rq.Rq;
 import com.qrstudy.qrstudy.base.rsData.RsData;
-import com.qrstudy.qrstudy.domain.entity.Member;
+import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.service.member.MemberService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
