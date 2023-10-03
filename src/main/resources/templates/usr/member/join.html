@@ -44,6 +44,13 @@
                     </div>
                     <div class="form-control">
                         <label class="label">
+                            <span class="label-text">이메일</span>
+                        </label>
+                        <input type="email" placeholder="이메일" class="input input-bordered" maxlength="30" onchange="$(this).keyup();" onpaste="setTimeoutZero(()=>$(this).keyup());" onkeyup="checkEmailDupDebounce();">
+                        <div class="mt-2 text-sm"></div>
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
                             <span class="label-text">프로필 이미지</span>
                         </label>
                         <input type="file" name="profileImg" class="file-input file-input-bordered" accept="image/jpeg, image/png, image/gif">
@@ -62,6 +69,10 @@
                 </form>
 
                 <script>
+
+                    const joinForm = documet['join-form'];
+
+                    //username 중복체크 시작
                     function checkUsernameDup(form){
 
                         form.username.value = form.username.value.trim();
@@ -88,15 +99,13 @@
                             .then((rsData)=>{
 
                                 if(rsData.success){
-                                    validUsername = form.username.value;
+                                    validUsername = rsData.data;
 
                                 }
                                 setUsernameInputMsg(rsData.success,rsData.msg);
                             });
 
                     }
-
-                    const joinForm = document['join-form'];
 
                     const checkUsernameDupDebounce = _.debounce(() => checkUsernameDup(joinForm), 500);
 
@@ -118,6 +127,57 @@
 
                     let validUsername = '';
                     let lastCheckedUsername = '';
+                    //username 중복 체크 끝
+
+                    //email 중복체크 시작
+                    function checkEmailDup(form){
+                        form.email.value = form.email.value.trim();
+
+                        if(form.email.value.length == 0){
+                            clearEmailInputMsg();
+                            return;
+                        }
+
+                        if(form.email.value.length < 4){
+                            clearEmailInputMsg();
+                            return;
+                        }
+
+                        if(validEmail == form.email.value) return;
+                        if(lastCheckedEmail == form.email.value) return;
+
+                        lastCheckedEmail = from.email.value;
+
+                        clearEmailInputMsg();
+
+                        fetch(
+                            'checkEmailDup?email='+form.email.value
+                        )
+                        .then(res => res.json())
+                        .then((rsData)=>{
+                            if(rsData.success){
+                                validEmail = rsData.data;
+                            }
+                            setEmailInputMsg(rsData.success,rsData.msg);
+                        });
+                    }
+
+                    const checkEmailDupDebounce = _.debounce(()=>checkEmailDup(joinForm),500);
+
+                    function clearEmailInputMsg(){
+                        $(joinForm.email).removeClass('input-accent input-error');
+                        $(joinForm.email).next().removeClass('text-green-400 text-red-400');
+                        $(joinForm.email).next().empty();
+                    }
+
+                    function setEmailInputMsg(isSuccess,msg){
+                        if(isSuccess) $(joinForm.email).addClass('input-accent');
+                        if(!isSuccess) $(joinForm.email).addClass('input-error');
+                    }
+
+                    let vaildEmail='';
+                    let lastCheckedEmail='';
+
                     let submitJoinFormDone = false;
 
                     function submitJoinForm(form){
@@ -171,9 +231,28 @@
                             return;
                         }
 
+                        form.email.value = form.email.value.trim();
+                        if(form.email.value.length == 0){
+                            form.email.focus();
+                            toastWarning('이메일을 입력해주세요.');
+                            return;
+                        }
+
+                        if(form.email.value.length < 4){
+                            form.email.focus();
+                            toastWarning('이메일을 4자 이상 입력해주세요.');
+                            return;
+                        }
+
                         if(validUsername != form.username.value){
                             $(form.username).next().focus();
                             toastWarning('아이디 중복체크를 해주세요.');
+                            return;
+                        }
+
+                        if(validEmail!=form.email.value){
+                            $(form.email).next().focus();
+                            toastWarning('이메일 중복 체크를 해주세요.');
                             return;
                         }
 

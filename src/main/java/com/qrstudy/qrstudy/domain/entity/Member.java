@@ -28,6 +28,7 @@ public class Member extends BaseEntity {
     private String password;
     @Setter
     private String nickname;
+    private String email;
 
     public boolean isAdmin(){
         return "admin".equals(username);
