@@ -10,25 +10,10 @@ public class AppConfig {
     @Getter
     public static String  genFileDirPath;
 
-    @Getter
-    public static String siteName;
-
-    @Getter
-    public static String siteBaseUrl;
+    
 
     @Value("${custom.genFile.dirPath}")
-    public void setGenFileDirPath(String genFileDirPath){
+    public void setFileDirPath(String genFileDirPath){
         AppConfig.genFileDirPath = genFileDirPath;
     }
-
-    @Value("${custom.site.name}")
-    public void setSiteName(String siteName) {
-        AppConfig.siteName = siteName;
-    }
-
-    @Value("${custom.site.baseUrl}")
-    public void setSiteBaseUrl(String siteBaseUrl) {
-        AppConfig.siteBaseUrl = siteBaseUrl;
-    }
-
 }
