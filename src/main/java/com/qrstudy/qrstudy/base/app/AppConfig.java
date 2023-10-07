@@ -10,7 +10,7 @@ public class AppConfig {
     @Getter
     public static String  genFileDirPath;
 
-    
+    .
 
     @Value("${custom.genFile.dirPath}")
     public void setFileDirPath(String genFileDirPath){
