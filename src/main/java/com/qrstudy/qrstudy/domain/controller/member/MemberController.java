@@ -4,6 +4,7 @@ import com.qrstudy.qrstudy.base.rq.Rq;
 import com.qrstudy.qrstudy.base.rsData.RsData;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.service.member.MemberService;
+import com.qrstudy.qrstudy.domain.standard.exception.EmailNotVerifiedAccessDeniedException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -55,6 +56,18 @@ public class MemberController {
 
 
         return rq.redirect("/",joinRs.getMsg());
+    }
+
+    public boolean assertCurrentMemberVerified(){
+        if (!memberService.isEmailVerified(rq.getMember()))
+            throw new EmailNotVerifiedAccessDeniedException("이메일 인증 후 이용해주세요.");
+        return true;
+    }
+
+    @PreAuthorize("isAnonymous()")
+    @GetMapping("/notVerified")
+    public String showNotVerified(){
+        return "/usr/member/notVerified";
     }
 
     @PreAuthorize("isAnonymous()")

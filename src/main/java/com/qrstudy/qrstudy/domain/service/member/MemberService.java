@@ -128,5 +128,8 @@ public class MemberService {
         attrService.set("member__%d__extra__emailVerified".formatted(member.getId()), true);
     }
 
+    public boolean isEmailVerified(Member member){
+        return attrService.getAsBoolean("member__%d__extra__emailVerified".formatted(member.getId()),false);
+    }
 
 }
