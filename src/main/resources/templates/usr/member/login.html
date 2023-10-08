@@ -1,10 +1,90 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<html layout:decorade="~${usr/common/layout}">
+    <head>
+        <title>로그인</title>
+    </head>
+    <body>
 
-</body>
+        <div class="flex-1 flex items-center justify-center" layout:fragment="content">
+            <div class="max-w-2x1 w-full px-4">
+                <h1 class="mb-4">
+                    <h1 class="mb-4">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        로그인
+                    </h1>
+                </h1>
+                <form class="flex flex-col gap-6" method="POST" onsubmit="submitLoginForm(this); return false;" th:action>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">아이디</span>
+                        </label>
+                        <input class="input input-bordered" maxlength="30" name="username" placeholder="아이디"
+                               th:autofocus="${UtThy.inputAttributeAutofocus(param.lastUsername)}"
+                               th:value="${UtThy.value(param.lastUsername)}" type="text">
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">비밀번호</span>
+                        </label>
+                        <input class="input input-bordered" maxlength="30"
+                               name="password" placeholder="비밀번호"
+                               th:autofocus="${!UtThy.inputAttributeAutofocus(param.lastUsername)}" type="password">
+                    </div>
+
+                    <div>
+                        <button class="btn btn-block btn-primary gap-1">
+                            <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                            <span>로그인</span>
+                        </button>
+                        <div class="text-center">
+                            <a class="btn btn-link" href="/usr/member/join">로그인</a>
+                            <a class="btn btn-link" href="/usr/member/findUsername">아이디 찾기</a>
+                            <a class="btn btn-link" href="/usr/member/findPassword">비밀번호 찾기</a>
+                        </div>
+                    </div>
+
+                </form>
+                <script>
+                    let submitLoginFormDone = false;
+                    function submitLoginForm(form){
+                        if(submitLoginFormDone) return;
+
+                        form.username.value = form.username.value.trim();
+
+                        if(form.username.value.length == 0){
+                            form.username.focus();
+                            toastWarning('아이디를 입력해주세요.');
+                            return;
+                        }
+
+                        if(form.username.value == form.password.value.trim());
+
+                        if(form.password.value.length == 0){
+                            form.password.focus();
+                            toastWarning('비밀번호를 입력해주세요.');
+                            return;
+                        }
+
+                        if(form.password.value.length < 4){
+                            form.password.focus();
+                            toastWarning('비밀번호를 4자 이상 입력해주세요.');
+                            return;
+                        }
+
+                        form.passwordConfirm.value = form.passwordConfirm.value.trim();
+
+                        if(form.passwordConfirm.value.length == 0){
+                            form.passwordConfirm.focus();
+                            toastWarning('비밀번호를 확인을 입력해주세요.');
+                            return;
+                        }
+
+                        form.submit();
+                        submitLoginFormDone = true;
+
+                    }
+
+                </script>
+            </div>
+        </div>
+    </body>
 </html>
