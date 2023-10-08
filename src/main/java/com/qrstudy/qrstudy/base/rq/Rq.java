@@ -1,5 +1,6 @@
 package com.qrstudy.qrstudy.base.rq;
 
+import com.qrstudy.qrstudy.base.rsData.RsData;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.service.member.MemberService;
 import com.qrstudy.qrstudy.domain.standard.util.Ut;
@@ -156,6 +157,12 @@ public class Rq {
 
     public String redirect(String url,String msg){
         return "redirect:"+Ut.url.modifyQueryParam(url,"msg",Ut.url.endcodeWithTtl(msg));
+    }
+
+    public String redirectOrBack(String url, RsData rs) {
+        if (rs.isFail()) return historyBack(rs);
+
+        return redirect(url, rs);
     }
 
     public String getProfileImgUrl(){

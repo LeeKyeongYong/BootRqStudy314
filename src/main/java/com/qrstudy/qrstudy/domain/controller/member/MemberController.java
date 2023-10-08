@@ -53,9 +53,7 @@ public class MemberController {
                 ,joinForm.getProfileImg()
           );
 
-            if(joinRs.isFail()){
-                return rq.historyBack(joinRs.getMsg());
-            }
+
         return rq.redirect("/",joinRs.getMsg());
     }
 
