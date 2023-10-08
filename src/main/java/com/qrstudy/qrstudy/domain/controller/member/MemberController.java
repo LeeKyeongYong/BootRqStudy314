@@ -39,10 +39,44 @@ public class MemberController {
         return "usr/member/join";
     }
 
+
+    @PreAuthorize("isAnonymous()")
+    @PostMapping("/join")
+    public String join(@Valid JoinForm joinForm){
+
+
+        RsData<Member> joinRs =  memberService.join(
+                joinForm.getUsername()
+                ,joinForm.getPassword()
+                ,joinForm.getNickname()
+                ,joinForm.getEmail()
+                ,joinForm.getProfileImg()
+          );
+
+            if(joinRs.isFail()){
+                return rq.historyBack(joinRs.getMsg());
+            }
+        return rq.redirect("/",joinRs.getMsg());
+    }
+
+    @PreAuthorize("isAnonymous()")
+    @GetMapping("checkUsernameDup")
+    @ResponseBody
+    public RsData<String> checkUsernameDup(String username){
+        return memberService.checkUsernameDup(username);
+    }
+
+    @PreAuthorize("isAnonymous()")
+    @GetMapping("/checkEmailDup")
+    @ResponseBody
+    public RsData<String> checkEmailDup(String email){
+        return memberService.checkUsernameDup(email);
+    }
+
     @Getter
     @AllArgsConstructor
     @ToString
-    public static class JoinForm{
+    public static class JoinForm {
         @NotBlank
         private String username;
         @NotBlank
@@ -52,30 +86,5 @@ public class MemberController {
         @NotBlank
         private String email;
         private MultipartFile profileImg;
-    }
-
-    @PreAuthorize("isAnonymous()")
-    @PostMapping("/join")
-    public String join(@Valid JoinForm joinForm){
-
-        System.out.println("joinForm: "+joinForm);
-        RsData<Member> joinRs =  memberService.join(joinForm.getUsername(),joinForm.getPassword(),joinForm.getNickname(),joinForm.getEmail(),joinForm.getProfileImg());
-
-            if(joinRs.isFail()){
-                return rq.historyBack(joinRs.getMsg());
-            }
-        return rq.redirect("/",joinRs.getMsg());
-    }
-
-    @GetMapping("checkUsernameDup")
-    @ResponseBody
-    public RsData<String> checkUsernameDup(String username){
-        return memberService.checkUsernameDup(username);
-    }
-
-    @GetMapping("/checkEmailDup")
-    @ResponseBody
-    public RsData<String> checkEmailDup(String email){
-        return memberService.checkUsernameDup(email);
     }
 }

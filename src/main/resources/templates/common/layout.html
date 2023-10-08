@@ -2,9 +2,10 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible" content="ie=edge">
+
     <title layout:title-pattern="$CONTENT_TITLE | $LAYOUT_TITLE" th:text="로그인테스트"></title>
 
     <!-- 제이쿼리 불러오기 -->
@@ -12,10 +13,10 @@
 
     <!-- toastr 불러오기 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-    <link rel="stylesheet" href="https://jhs512.github.io/toastr/toastr.css">
+    <link href="https://jhs512.github.io/toastr/toastr.css" rel="stylesheet">
 
     <!-- 폰트어썸 아이콘 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
     <!-- 아이콘 목록 : https://fontawesome.com/search?o=r&m=free -->
 </head>
 <body>
@@ -30,14 +31,15 @@
             <div class="navbar bg-base-100">
                 <div class="navbar-start">
                     <div class="drop-down">
-                        <label tabindex="0" class="btn btn-ghost btn-circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                                 stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                      d="M4 6h16M4 12h16M4 18h7"/>
+
+
+                        <label class="btn btn-ghost btn-circle" tabindex="0" >
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 6h16M4 12h16M4 18h7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      />
                             </svg>
                         </label>
-                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 show bg-base-100 rounded-box w-52">
+                        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"  tabindex="0">
                             <li th:if="${@rq.logout}"><a href="/usr/member/login"><i class="fa-solid fa-arrow-right-to-bracket"></i>로그인</a></li>
                             <li th:if="${@rq.logout}"><a href="/usr/member/join"><i class="fa-solid fa-user-plus"></i>회원가입</a></li>
                             <li th:if="${@rq.login}"><a href="/usr/member/me"><i class="fa-solid fa-user"></i>내 정보</a></li>

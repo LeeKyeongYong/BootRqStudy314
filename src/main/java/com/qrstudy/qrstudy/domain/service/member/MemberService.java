@@ -1,5 +1,6 @@
 package com.qrstudy.qrstudy.domain.service.member;
 
+import com.qrstudy.qrstudy.base.app.AppConfig;
 import com.qrstudy.qrstudy.base.rsData.RsData;
 import com.qrstudy.qrstudy.domain.controller.genFile.GenFile;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
@@ -32,11 +33,43 @@ public class MemberService {
     private final AttrService attrService;
 
 
+    //조회
+    private Optional<Member> findByEmail(String email){
+        return memberRepository.findByEmail(email);
+    }
+
+    public Optional<Member> findByUsername(String username){
+        return memberRepository.findByUsername(username);
+    }
+
+    public Optional<Member> findById(long id){
+        return memberRepository.findById(id);
+    }
+
+    public Optional<String> findProfileImgUrl(Member member){
+        return genFileService.findGenFileBy(member.getModelName(),member.getId(),"common","profileImg",0)
+                .map(GenFile::getUrl);
+    }
+
+    public RsData<String> checkUsernameDup(String username){
+        if(findByUsername(username).isPresent()) return RsData.of("F-1","%S(은)는 사용중인 아이디 입니다.".formatted(username));
+        return RsData.of("S-1","%s(은)는 사용 가능한 아이디 입니다.".formatted(username),username);
+    }
+
+    public RsData<String> checkEmailDup(String email){
+        if(findByEmail(email).isPresent()) return RsData.of("F-1","%s(은)는 사용중인 이메일 입니다.".formatted(email));
+
+        return RsData.of("S-1","%s(은)는 사용 가능한 이메일 입니다.".formatted(email),email);
+    }
+
     @Transactional
     public RsData<Member> join(String username, String password, String nickname,String email,MultipartFile profileImg){
 
         if(findByUsername(username).isPresent())
             return RsData.of("F-1","%s(은)는 사용중인 아이디 입니다.".formatted(username));
+
+        if(findByEmail(email).isPresent())
+            return RsData.of("F-2", "%s(은)는 사용중인 이메일 입니다.".formatted(email));
 
         Member member = Member
                 .builder()
@@ -46,20 +79,33 @@ public class MemberService {
                 .email(email)
                 .build();
 
-        member = memberRepository.save(member);
+        memberRepository.save(member);
 
-        if(profileImg!=null){
-            genFileService.save(member.getModelName(),member.getId(),"common","profileImg",0,profileImg);
-        }
+        if(profileImg!=null) saveProfileImg(member,profileImg);
 
         sendJoinCompleteEmail(member);
-        sendVerificationEmail(member);
+        sendEmailVerificationEmail(member);
 
         return RsData.of("S-1","회원가입이 완료 되었습니다.",member);
     }
 
+    private void saveProfileImg(Member member,MultipartFile profileImg){
+        genFileService.save(member.getModelName(),member.getId(),"common","profileImg",0,profileImg);
+    }
+
+    private void sendEmailVerificationEmail(Member member) {
+        emailVerificationService.send(member);
+    }
+
     private void sendJoinCompleteEmail(Member member){
-        CompletableFuture<RsData> sendRsFuture = emailService.send(member.getEmail(),"회원가입이 완료되었습니다","회원가입이 완료되었습니다.");
+
+        CompletableFuture<RsData> sendRsFuture = emailService.send(
+                member.getEmail(),
+                "[%s 가입축하] 회원가입이 완료되었습니다.".formatted(
+                        AppConfig.getSiteName()
+                ),
+                "많은 이용 바랍니다."
+        );
 
         final String email = member.getEmail();
 
@@ -73,53 +119,14 @@ public class MemberService {
         });
     }
 
-    private Optional<Member> findByEmail(String email){
-        return memberRepository.findByEmail(email);
-    }
-
-    private void sendVerificationEmail(Member member){
+    private void sendEmailVertificationEmail(Member member){
         emailVerificationService.send(member);
     }
 
-    public Optional<Member> findByUsername(String username){
-        return memberRepository.findByUsername(username);
-    }
-
-    public Optional<Member> findById(long id){
-        return memberRepository.findById(id);
-    }
-
-    public RsData<String> checkUsernameDup(String username){
-        if(findByUsername(username).isPresent()) return RsData.of("F-1","%s(은)는 사용중인 아이디 입니다".formatted(username));
-
-        return RsData.of("S-1","%s(은)는 사용 가능한 아이디 입니다.".formatted(username),username);
-    }
-
-    public RsData<String> checkEmailDup(String email){
-        if(findByEmail(email).isPresent()) return RsData.of("F-1","%s(은)는 사용중인 메일입니다.".formatted(email),email);
-        return RsData.of("S-1","%s(은)는 사용 가능한 이메일입니다.".formatted(email));
-    }
-
-    public Optional<String> findProfileImgUrl(Member member){
-        return genFileService.findGenFileBy(member.getModelName(),member.getId(),"common","profileImg",0).map(GenFile::getUrl);
-    }
-
-    @Transactional
-    public RsData verifyEmail(long id,String verificationCode){
-        RsData verifyVerificationCodeRs = emailVerificationService.verifyVerificationCode(id,verificationCode);
-
-        if(verifyVerificationCodeRs.isSuccess() == false){
-            return verifyVerificationCodeRs;
-        }
-
-        Member member = memberRepository.findById(id).get();
-
-        setEmailVerified(member);
-
-        return RsData.of("S-1","이메일인증이 완료 되었습니다.");
-    }
 
     private void setEmailVerified(Member member){
         attrService.set("member__%d__extra__emailVerified".formatted(member.getId()), true);
     }
+
+
 }

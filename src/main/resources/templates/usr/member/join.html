@@ -17,7 +17,7 @@
                             <span class="label-text">아이디</span>
                         </label>
                         <input type="text" name="username" placeholder="아이디" class="input input-bordered" autofocus maxlength="30"
-                               onchange="$(this).keyup();" onpaste="setTimeoutZero(()=>$(this).keyup());" onkeyup="$(this).removeClass('input-accent'); checkUsernameDupDebounce();">
+                               onchange="$(this).keyup();" onpaste="setTimeoutZero(()=>$(this).keyup());" onkeyup="checkUsernameDupDebounce();">
                         <!--<button onclick="checkUsernameDup(this);" type="button" class="btn btn-block mt-2">
                             <span>아이디 중복 체크</span>
                         </button>-->
@@ -27,7 +27,7 @@
                         <label class="label">
                             <span class="label-text">비밀번호</span>
                         </label>
-                        <input type="password" name="password" placeholder="비밀번호" class="input input-bordered" maxlength="30">
+                        <input  class="input input-bordered" maxlength="30" type="password" name="password" placeholder="비밀번호" class="input input-bordered" maxlength="30">
                     </div>
 
                     <div class="form-control">
@@ -40,13 +40,15 @@
                         <label class="label">
                             <span class="label-text">별명</span>
                         </label>
-                        <input type="text" name="nickname" placeholder="닉네임" class="input input-bordered" maxlength="30">
+                        <input type="password" name="nickname" placeholder="닉네임" class="input input-bordered" maxlength="30">
                     </div>
                     <div class="form-control">
                         <label class="label">
                             <span class="label-text">이메일</span>
                         </label>
-                        <input type="email" placeholder="이메일" class="input input-bordered" maxlength="30" onchange="$(this).keyup();" onpaste="setTimeoutZero(()=>$(this).keyup());" onkeyup="checkEmailDupDebounce();">
+                        <input type="email" placeholder="이메일" class="input input-bordered" maxlength="30"
+                               onchange="$(this).keyup();" onpaste="setTimeoutZero(()=>$(this).keyup());"
+                               onkeyup="checkEmailDupDebounce();">
                         <div class="mt-2 text-sm"></div>
                     </div>
                     <div class="form-control">
@@ -61,9 +63,9 @@
                             <span>회원가입</span>
                         </button>
                         <div class="text-center">
-                            <button class="btn btn-link">로그인</button>
-                            <button class="btn btn-link">아이디 찾기</button>
-                            <button class="btn btn-link">비밀번호 찾기</button>
+                            <a class="btn btn-link">로그인</a>
+                            <a class="btn btn-link">아이디 찾기</a>
+                            <a class="btn btn-link">비밀번호 찾기</a>
                         </div>
                     </div>
                 </form>
@@ -95,13 +97,13 @@
 
                         fetch('checkUsernameDup?username='+form.username.value)
                             .then(res => res.json())
-                            .then((rsData)=>{
+                            .then((rs)=>{
 
-                                if(rsData.success){
-                                    validUsername = rsData.data;
+                                if(rs.success){
+                                    validUsername = rs.data;
 
                                 }
-                                setUsernameInputMsg(rsData.success,rsData.msg);
+                                setUsernameInputMsg(rs.success,rs.msg);
                             });
 
                     }
@@ -152,11 +154,11 @@
                             'checkEmailDup?email='+form.email.value
                         )
                         .then(res => res.json())
-                        .then((rsData)=>{
-                            if(rsData.success){
-                                validEmail = rsData.data;
+                        .then((rs)=>{
+                            if(rs.success){
+                                validEmail = rs.data;
                             }
-                            setEmailInputMsg(rsData.success,rsData.msg);
+                            setEmailInputMsg(rs.success,rs.msg);
                         });
                     }
 
