@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
+<html layout:decorate="~{usr/common/layout">
+    <head>
+        <title>회원 인증필요</title>
+    </head>
+    <body>
+        <div class="flext-1 items-center justify-center" layout:fragment="center">
+            <div class="max-w-2xl w-full px-4">
+                <h1 class="mb-4">
+                    <i class="fa-regular fa-rectagle-xmark"></i>
+                    회원정보 인증필요
+                </h1>
+                <div class="text-gray-400">
+                    <ul class="list-disc">
+                        <li>회원정보 인증이 필요합니다.</li>
+                        <li>가입 직후 발송된 이메일에 인증코드가 포함된 URL이 있습니다.</li>
+                        <li>해당 url을 클릭하시면 인증이 완료됩니다.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>
