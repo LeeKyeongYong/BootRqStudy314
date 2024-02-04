@@ -1,9 +1,14 @@
 package com.qrstudy.qrstudy.base.jpa;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -31,12 +36,12 @@ public class BaseEntity {
     @LastModifiedDate
     private LocalDateTime modifyDate;
 
-    @Transient // 아래 필드가  DB필드가 되는것을 막는다.
+    @Transient // 아래 필드가 DB 필드가 되는 것을 막는다.
     @Builder.Default
-    private Map<String,Object> extra = new LinkedHashMap<>();
+    private Map<String, Object> extra = new LinkedHashMap<>();
 
-    public String getModelName(){
+    public String getModelName() {
         String simpleName = this.getClass().getSimpleName();
-        return Character.toLowerCase(simpleName.charAt(0))+simpleName.substring(1);
+        return Character.toLowerCase(simpleName.charAt(0)) + simpleName.substring(1);
     }
 }

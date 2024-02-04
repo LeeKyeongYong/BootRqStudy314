@@ -14,24 +14,23 @@ import static lombok.AccessLevel.PROTECTED;
 @Setter
 @Getter
 @AllArgsConstructor(access = PROTECTED)
-@NoArgsConstructor(access =  PROTECTED)
+@NoArgsConstructor(access = PROTECTED)
 @SuperBuilder
 @ToString(callSuper = true)
 public class SendEmailLog extends BaseEntity {
-
-    private String resultcode;
+    private String resultCode;
     private String message;
     private String email;
     private String subject;
     private String body;
-    private LocalDateTime sendDate;
+    private LocalDateTime sendEndDate;
     private LocalDateTime failDate;
 
-    public void setCompleted(RsData rs){
-        this.resultcode = rs.getResultCode();
+    public void setCompleted(RsData rs) {
+        this.resultCode = rs.getResultCode();
         this.message = rs.getMsg();
 
-        if(rs.isSuccess()) this.sendDate = LocalDateTime.now();
+        if (rs.isSuccess()) this.sendEndDate = LocalDateTime.now();
         else this.failDate = LocalDateTime.now();
     }
 }

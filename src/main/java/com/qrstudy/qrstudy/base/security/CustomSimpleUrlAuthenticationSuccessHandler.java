@@ -15,22 +15,20 @@ import org.springframework.security.web.savedrequest.SavedRequest;
 import java.io.IOException;
 
 public class CustomSimpleUrlAuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     private RequestCache requestCache = new HttpSessionRequestCache();
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-
-        SavedRequest savedRequest = this.requestCache.getRequest(request,response);
-
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws ServletException, IOException {
+        SavedRequest savedRequest = this.requestCache.getRequest(request, response);
         clearAuthenticationAttributes(request);
 
-        String targetUrl = savedRequest!=null?savedRequest.getRedirectUrl():getDefaultTargetUrl();
+        String targetUrl = savedRequest != null ? savedRequest.getRedirectUrl() : getDefaultTargetUrl();
 
-        targetUrl = Ut.url.modifyQueryParam(targetUrl,"msg",Ut.url.endcodeWithTtl("환영합니다."));
+        targetUrl = Ut.url.modifyQueryParam(targetUrl, "msg", Ut.url.encodeWithTtl("환영합니다."));
 
-        getRedirectStrategy().sendRedirect(request,response,targetUrl);
+        getRedirectStrategy().sendRedirect(request, response, targetUrl);
     }
 }

@@ -14,8 +14,8 @@ import java.util.List;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity
-@Getter
 @Setter
+@Getter
 @AllArgsConstructor(access = PROTECTED)
 @NoArgsConstructor(access = PROTECTED)
 @SuperBuilder
@@ -24,26 +24,44 @@ public class Member extends BaseEntity {
 
     @Column(unique = true)
     private String username;
-    @Setter
     private String password;
-    @Setter
+    @Column(unique = true)
     private String nickname;
+    @Column(unique = true)
+    private String producerName;
     private String email;
 
-    public boolean isAdmin(){
+    public boolean isAdmin() {
         return "admin".equals(username);
     }
 
-    public List<? extends GrantedAuthority> getGrantedAuthorities(){
+    public boolean isProducer() {
+        return producerName != null;
+    }
+
+    public List<? extends GrantedAuthority> getGrantedAuthorities() {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
 
-        //모든 멤버는 member권한을 가진다.
+        // 모든 멤버는 member 권한을 가진다.
         grantedAuthorities.add(new SimpleGrantedAuthority("member"));
 
-        //username이 admin이 회원은 추가로 admin권한을 가진다.
-        if(isAdmin()){
-            grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
-        }
+        // username이 admin인 회원은 추가로 admin 권한도 가진다.
+        if (isAdmin()) grantedAuthorities.add(new SimpleGrantedAuthority("admin"));
+        if (isProducer()) grantedAuthorities.add(new SimpleGrantedAuthority("producer"));
+
         return grantedAuthorities;
+    }
+
+    public boolean isSocialMember() {
+        return username.startsWith("KAKAO_");
+    }
+
+    public boolean isModifyAvailable() {
+        return !isSocialMember();
+    }
+
+    public String getEmailForPrint() {
+        if (isSocialMember()) return "-";
+        return email;
     }
 }

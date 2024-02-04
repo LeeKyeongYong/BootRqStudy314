@@ -10,13 +10,15 @@ import org.springframework.security.web.access.AccessDeniedHandlerImpl;
 
 import java.io.IOException;
 
-public class CustomAccessDenineHandler extends AccessDeniedHandlerImpl {
+public class CustomAccessDeniedHandler extends AccessDeniedHandlerImpl {
+
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
-        if(accessDeniedException instanceof EmailNotVerifiedAccessDeniedException){
-            response.sendRedirect("/usr/member/notVerified?msg=", Ut.url.endcodeWithTtl(accessDeniedException.getMessage()));
+        if (accessDeniedException instanceof EmailNotVerifiedAccessDeniedException) {
+            response.sendRedirect("/usr/member/notVerified?msg=" + Ut.url.encodeWithTtl(accessDeniedException.getMessage()));
             return;
         }
+
         super.handle(request, response, accessDeniedException);
     }
 }
