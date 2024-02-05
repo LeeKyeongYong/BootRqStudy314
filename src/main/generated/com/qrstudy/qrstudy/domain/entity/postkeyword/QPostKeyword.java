@@ -37,7 +37,7 @@ public class QPostKeyword extends EntityPathBase<PostKeyword> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> modifyDate = _super.modifyDate;
 
-    public final NumberPath<<any>> postTags = createNumber("postTags", <any>.class);
+    public final SetPath<com.qrstudy.qrstudy.domain.entity.posttag.PostTag, SimplePath<com.qrstudy.qrstudy.domain.entity.posttag.PostTag>> postTags = this.<com.qrstudy.qrstudy.domain.entity.posttag.PostTag, SimplePath<com.qrstudy.qrstudy.domain.entity.posttag.PostTag>>createSet("postTags", com.qrstudy.qrstudy.domain.entity.posttag.PostTag.class, SimplePath.class, PathInits.DIRECT2);
 
     public final NumberPath<Long> total = createNumber("total", Long.class);
 

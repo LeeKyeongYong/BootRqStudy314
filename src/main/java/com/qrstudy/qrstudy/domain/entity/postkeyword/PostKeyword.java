@@ -2,7 +2,9 @@ package com.qrstudy.qrstudy.domain.entity.postkeyword;
 
 import com.qrstudy.qrstudy.base.jpa.BaseEntity;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
+import com.qrstudy.qrstudy.domain.entity.posttag.PostTag;
 import com.qrstudy.qrstudy.domain.standard.DocumentSortableKeyword;
+import com.qrstudy.qrstudy.domain.standard.DocumentSortableTag;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -10,7 +12,8 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.LinkedHashSet;
-
+import java.util.Set;
+import jakarta.persistence.OrderBy;
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
 
