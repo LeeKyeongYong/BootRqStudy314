@@ -22,7 +22,7 @@ public class QArticleTag extends EntityPathBase<ArticleTag> {
 
     public static final QArticleTag articleTag = new QArticleTag("articleTag");
 
-    public final com.qrstudy.qrstudy.base.jpa.QBaseEntity _super = new com.qrstudy.qrstudy.base.jpa.QBaseEntity(this);
+    public final com.qrstudy.qrstudy.base.jpa.baseEntity.QBaseEntity _super = new com.qrstudy.qrstudy.base.jpa.baseEntity.QBaseEntity(this);
 
     public final com.qrstudy.qrstudy.domain.entity.article.QArticle article;
 

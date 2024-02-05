@@ -1,6 +1,6 @@
 package com.qrstudy.qrstudy.domain.entity.book;
 
-import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.base.jpa.baseEntity.BaseEntity;
 import com.qrstudy.qrstudy.domain.entity.bookTag.BookTag;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.entity.postkeyword.PostKeyword;
@@ -9,8 +9,10 @@ import com.qrstudy.qrstudy.domain.standard.repository.DocumentTag;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+
 import java.util.HashSet;
 import java.util.Set;
+
 import static lombok.AccessLevel.PROTECTED;
 
 

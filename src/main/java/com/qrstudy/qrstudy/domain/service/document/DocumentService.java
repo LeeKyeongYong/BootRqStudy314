@@ -1,6 +1,6 @@
 package com.qrstudy.qrstudy.domain.service.document;
 
-import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.base.jpa.baseEntity.BaseEntity;
 import com.qrstudy.qrstudy.domain.service.genFile.GenFileService;
 import com.qrstudy.qrstudy.domain.standard.repository.Document;
 import com.qrstudy.qrstudy.domain.standard.util.Ut;

@@ -1,6 +1,6 @@
 package com.qrstudy.qrstudy.domain.entity.articleTag;
 
-import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.base.jpa.baseEntity.BaseEntity;
 import com.qrstudy.qrstudy.domain.entity.article.Article;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.standard.repository.DocumentTag;

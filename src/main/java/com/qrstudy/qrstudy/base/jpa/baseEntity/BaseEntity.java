@@ -1,5 +1,4 @@
-package com.qrstudy.qrstudy.base.jpa;
-
+package com.qrstudy.qrstudy.base.jpa.baseEntity;
 
 import jakarta.persistence.*;
 import lombok.*;

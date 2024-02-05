@@ -1,7 +1,7 @@
 package com.qrstudy.qrstudy.domain.entity.bookTag;
 
 
-import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.base.jpa.baseEntity.BaseEntity;
 import com.qrstudy.qrstudy.domain.entity.book.Book;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.standard.repository.DocumentTag;

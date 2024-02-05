@@ -22,7 +22,7 @@ public class QBookTag extends EntityPathBase<BookTag> {
 
     public static final QBookTag bookTag = new QBookTag("bookTag");
 
-    public final com.qrstudy.qrstudy.base.jpa.QBaseEntity _super = new com.qrstudy.qrstudy.base.jpa.QBaseEntity(this);
+    public final com.qrstudy.qrstudy.base.jpa.baseEntity.QBaseEntity _super = new com.qrstudy.qrstudy.base.jpa.baseEntity.QBaseEntity(this);
 
     public final com.qrstudy.qrstudy.domain.entity.member.QMember author;
 

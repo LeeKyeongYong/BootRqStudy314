@@ -22,7 +22,7 @@ public class QArticle extends EntityPathBase<Article> {
 
     public static final QArticle article = new QArticle("article");
 
-    public final com.qrstudy.qrstudy.base.jpa.QBaseEntity _super = new com.qrstudy.qrstudy.base.jpa.QBaseEntity(this);
+    public final com.qrstudy.qrstudy.base.jpa.baseEntity.QBaseEntity _super = new com.qrstudy.qrstudy.base.jpa.baseEntity.QBaseEntity(this);
 
     public final SetPath<com.qrstudy.qrstudy.domain.entity.articleTag.ArticleTag, com.qrstudy.qrstudy.domain.entity.articleTag.QArticleTag> articleTags = this.<com.qrstudy.qrstudy.domain.entity.articleTag.ArticleTag, com.qrstudy.qrstudy.domain.entity.articleTag.QArticleTag>createSet("articleTags", com.qrstudy.qrstudy.domain.entity.articleTag.ArticleTag.class, com.qrstudy.qrstudy.domain.entity.articleTag.QArticleTag.class, PathInits.DIRECT2);
 

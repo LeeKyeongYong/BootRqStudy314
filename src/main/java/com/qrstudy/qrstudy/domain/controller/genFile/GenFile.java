@@ -1,7 +1,7 @@
 package com.qrstudy.qrstudy.domain.controller.genFile;
 
 import com.qrstudy.qrstudy.base.app.AppConfig;
-import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.base.jpa.baseEntity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;

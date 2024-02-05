@@ -1,6 +1,6 @@
 package com.qrstudy.qrstudy.domain.entity.email;
 
-import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.base.jpa.baseEntity.BaseEntity;
 import com.qrstudy.qrstudy.base.rsData.RsData;
 import jakarta.persistence.Entity;
 import lombok.*;

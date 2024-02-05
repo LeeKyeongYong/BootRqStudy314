@@ -1,7 +1,7 @@
 package com.qrstudy.qrstudy.domain.service.genFile;
 
 import com.qrstudy.qrstudy.base.app.AppConfig;
-import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.base.jpa.baseEntity.BaseEntity;
 import com.qrstudy.qrstudy.domain.controller.genFile.GenFile;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.repository.genFile.GenFileRepository;

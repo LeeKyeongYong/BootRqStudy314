@@ -1,6 +1,6 @@
 package com.qrstudy.qrstudy.domain.entity.member;
 
-import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.base.jpa.baseEntity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.*;
@@ -21,7 +21,6 @@ import static lombok.AccessLevel.PROTECTED;
 @SuperBuilder
 @ToString(callSuper = true)
 public class Member extends BaseEntity {
-
     @Column(unique = true)
     private String username;
     private String password;

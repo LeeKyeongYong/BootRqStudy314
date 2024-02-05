@@ -19,7 +19,7 @@ public class QSendEmailLog extends EntityPathBase<SendEmailLog> {
 
     public static final QSendEmailLog sendEmailLog = new QSendEmailLog("sendEmailLog");
 
-    public final com.qrstudy.qrstudy.base.jpa.QBaseEntity _super = new com.qrstudy.qrstudy.base.jpa.QBaseEntity(this);
+    public final com.qrstudy.qrstudy.base.jpa.baseEntity.QBaseEntity _super = new com.qrstudy.qrstudy.base.jpa.baseEntity.QBaseEntity(this);
 
     public final StringPath body = createString("body");
 
