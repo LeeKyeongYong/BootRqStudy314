@@ -104,7 +104,7 @@ public class NotProd {
 
     @Transactional
     public void work2() {
-      // Article article1 = articleService.findById(1L).get();
-      //  articleService.modify(article1, "제목 1 수정", "#자바2 #HTML", "내용 1\n수정", "내용 1<br />수정");
+        Article article1 = articleService.findById(1L).get();
+        articleService.modify(article1, "제목 1 수정", "#자바2 #HTML", "내용 1\n수정", "내용 1<br />수정");
     }
 }
