@@ -8,6 +8,7 @@ import com.qrstudy.qrstudy.domain.entity.post.Post;
 import com.qrstudy.qrstudy.domain.entity.postkeyword.PostKeyword;
 import com.qrstudy.qrstudy.domain.service.article.ArticleService;
 import com.qrstudy.qrstudy.domain.service.board.BoardService;
+import com.qrstudy.qrstudy.domain.service.book.BookService;
 import com.qrstudy.qrstudy.domain.service.member.MemberService;
 import com.qrstudy.qrstudy.domain.service.post.PostService;
 import com.qrstudy.qrstudy.domain.standard.util.Ut;

@@ -13,7 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.support.PageableExecutionUtils;
 import java.awt.print.Book;
-import static com.qrstudy.qrstudy.domain.entity.QBook.book;
+import static com.qrstudy.qrstudy.domain.entity.book.QBook.book;
 @RequiredArgsConstructor
 public class BookRepositoryImpl implements BookRepositoryCustom {
     private final JPAQueryFactory jpaQueryFactory;
