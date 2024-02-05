@@ -74,8 +74,10 @@ public class NotProd {
         Article article3 = articleService.write(board2, member1, "제목 3", "#자바의 정석", "내용 3").getData();
         Article article4 = articleService.write(board2, member2, "제목 4", "#홍길동", "내용 4").getData();
 
-        String file1Path = Ut.file.tempCopy(AppConfig.getResourcesStaticDirPath() + "/resource/common/common.css");
-        String file2Path = Ut.file.tempCopy(AppConfig.getResourcesStaticDirPath() + "/resource/common/common.js");
+        //D:\intel\BootRqJoin314\out\production\resources\static\common\resource\common
+        //D:\intel\BootRqJoin314\out\production\resources\static\resource\common
+        String file1Path = Ut.file.tempCopy(AppConfig.getResourcesStaticDirPath() + "/common/resource/common/common.css");
+        String file2Path = Ut.file.tempCopy(AppConfig.getResourcesStaticDirPath() + "/common/resource/common/common.js");
         articleService.saveAttachmentFile(article1, file1Path, 1L);
         articleService.saveAttachmentFile(article1, file2Path, 2L);
 
@@ -88,8 +90,8 @@ public class NotProd {
                 .findFirst()
                 .get();
 
-        String file3Path = Ut.file.tempCopy(AppConfig.getResourcesStaticDirPath() + "/resource/common/common.css");
-        String file4Path = Ut.file.tempCopy(AppConfig.getResourcesStaticDirPath() + "/resource/common/common.js");
+        String file3Path = Ut.file.tempCopy(AppConfig.getResourcesStaticDirPath() + "/common/resource/common/common.css");
+        String file4Path = Ut.file.tempCopy(AppConfig.getResourcesStaticDirPath() + "/common/resource/common/common.js");
         postService.saveAttachmentFile(post1, file3Path, 1L);
         postService.saveAttachmentFile(post1, file4Path, 2L);
 
@@ -106,5 +108,8 @@ public class NotProd {
     public void work2() {
         Article article1 = articleService.findById(1L).get();
         articleService.modify(article1, "제목 1 수정", "#자바2 #HTML", "내용 1\n수정", "내용 1<br />수정");
+
+        //Article article1 = articleService.findById(1L).orElseThrow(() -> new NoSuchElementException("Article not found with ID: 1"));
+        //articleService.modify(article1, "제목 1 수정", "#자바2 #HTML", "내용 1\n수정", "내용 1<br />수정");
     }
 }
