@@ -1,5 +1,6 @@
 package com.qrstudy.qrstudy.domain.repository.book;
 
+import com.qrstudy.qrstudy.domain.entity.book.Book;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.types.Order;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.support.PageableExecutionUtils;
-import java.awt.print.Book;
 import static com.qrstudy.qrstudy.domain.entity.book.QBook.book;
 @RequiredArgsConstructor
 public class BookRepositoryImpl implements BookRepositoryCustom {
