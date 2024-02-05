@@ -9,6 +9,7 @@ import com.qrstudy.qrstudy.domain.entity.postkeyword.PostKeyword;
 import com.qrstudy.qrstudy.domain.service.article.ArticleService;
 import com.qrstudy.qrstudy.domain.service.board.BoardService;
 import com.qrstudy.qrstudy.domain.service.member.MemberService;
+import com.qrstudy.qrstudy.domain.service.post.PostService;
 import com.qrstudy.qrstudy.domain.standard.util.Ut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
