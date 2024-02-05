@@ -1,4 +1,5 @@
-package com.qrstudy.qrstudy.domain.entity;
+package com.qrstudy.qrstudy.domain.entity.bookTag;
+
 
 import com.qrstudy.qrstudy.base.jpa.BaseEntity;
 import com.qrstudy.qrstudy.domain.entity.book.Book;

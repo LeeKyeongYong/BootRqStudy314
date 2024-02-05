@@ -3,6 +3,7 @@ package com.qrstudy.qrstudy.domain.service.book;
 import com.qrstudy.qrstudy.base.app.AppConfig;
 import com.qrstudy.qrstudy.base.rsData.RsData;
 import com.qrstudy.qrstudy.domain.controller.genFile.GenFile;
+import com.qrstudy.qrstudy.domain.entity.book.Book;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
 import com.qrstudy.qrstudy.domain.entity.postkeyword.PostKeyword;
 import com.qrstudy.qrstudy.domain.repository.book.BookRepository;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.awt.print.Book;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
