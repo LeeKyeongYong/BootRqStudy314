@@ -1,4 +1,4 @@
-package com.qrstudy.qrstudy.domain.standard;
+package com.qrstudy.qrstudy.domain.standard.repository;
 
 public interface DocumentSortableTag extends DocumentTag {
     long getSortNo();

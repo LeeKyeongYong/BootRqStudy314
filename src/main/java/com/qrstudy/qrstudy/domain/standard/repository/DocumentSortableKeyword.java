@@ -1,4 +1,4 @@
-package com.qrstudy.qrstudy.domain.standard;
+package com.qrstudy.qrstudy.domain.standard.repository;
 
 import java.util.Set;
 
