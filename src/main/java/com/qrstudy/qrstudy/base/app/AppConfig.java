@@ -9,6 +9,8 @@ import java.io.IOException;
 
 @Configuration
 public class AppConfig {
+
+    @Getter
     private static String resourcesStaticDirPath;
 
     @Getter

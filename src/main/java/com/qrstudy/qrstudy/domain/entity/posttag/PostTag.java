@@ -1,7 +1,17 @@
 package com.qrstudy.qrstudy.domain.entity.posttag;
 
+import com.qrstudy.qrstudy.base.jpa.BaseEntity;
+import com.qrstudy.qrstudy.domain.entity.member.Member;
+import com.qrstudy.qrstudy.domain.entity.post.Post;
 import com.qrstudy.qrstudy.domain.entity.postkeyword.PostKeyword;
 import com.qrstudy.qrstudy.domain.standard.DocumentSortableKeyword;
+import com.qrstudy.qrstudy.domain.standard.DocumentSortableTag;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+import java.util.Objects;
 
 import static lombok.AccessLevel.PRIVATE;
 import static lombok.AccessLevel.PROTECTED;
