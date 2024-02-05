@@ -1,16 +1,22 @@
 package com.qrstudy.qrstudy.base.initData;
 
 import com.qrstudy.qrstudy.base.app.AppConfig;
+import com.qrstudy.qrstudy.domain.entity.article.Article;
+import com.qrstudy.qrstudy.domain.entity.board.Board;
 import com.qrstudy.qrstudy.domain.entity.member.Member;
+import com.qrstudy.qrstudy.domain.entity.post.Post;
+import com.qrstudy.qrstudy.domain.entity.postkeyword.PostKeyword;
+import com.qrstudy.qrstudy.domain.service.article.ArticleService;
+import com.qrstudy.qrstudy.domain.service.board.BoardService;
 import com.qrstudy.qrstudy.domain.service.member.MemberService;
 import com.qrstudy.qrstudy.domain.standard.util.Ut;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.context.annotation.Profile;
 import org.springframework.transaction.annotation.Transactional;
 
 @Configuration

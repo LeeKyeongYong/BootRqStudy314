@@ -10,7 +10,7 @@ import java.io.IOException;
 @Configuration
 public class AppConfig {
 
-    @Getter
+    @Getter(onMethod_ = {@Value("${custom.resourcesStaticDirPath}")})
     private static String resourcesStaticDirPath;
 
     @Getter
@@ -44,6 +44,7 @@ public class AppConfig {
     public void setSiteBaseUrl(String siteBaseUrl) {
         AppConfig.siteBaseUrl = siteBaseUrl;
     }
+
 
     public static String getResourcesStaticDirPath() {
         if (resourcesStaticDirPath == null) {
